@@ -103,7 +103,7 @@
                         </div>
                        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
                             <a href="{{ route('admin.banners.index') }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
@@ -226,6 +226,9 @@
                     if (ckEditorInstance) {
                         $('#description').val(ckEditorInstance.getData());
                     }
+
+                    const $btn = $('#saveBtn');
+                    $btn.prop('disabled', true).text('Saving...');
 
                     // Now submit
                     form.submit();

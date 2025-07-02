@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use admin\banners\Requests\BannerCreateRequest;
 use admin\banners\Requests\BannerUpdateRequest;
 use admin\banners\Models\Banner;
-use Modules\Admin\Services\ImageService;
+use admin\admin_auth\Services\ImageService;
 
 class BannerManagerController extends Controller
 {
