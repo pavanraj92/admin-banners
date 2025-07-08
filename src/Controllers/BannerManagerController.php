@@ -24,7 +24,7 @@ class BannerManagerController extends Controller
             $banners = Banner::
                 filter($request->query('keyword'))
                 ->latest()
-                ->paginate(5)
+                ->paginate(Banner::getPerPageLimit())
                 ->withQueryString();
 
             return view('banner::admin.index', compact('banners'));
