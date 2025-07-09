@@ -18,7 +18,7 @@ This module provides CRUD operations for managing banners in the admin panel.
 
 ## Example Endpoints
 
-| Method | Endpoint           | Description         |
+| Method | Endpoint          | Description         |
 |--------|-------------------|---------------------|
 | GET    | `/banners`        | List all banners    |
 | POST   | `/banners`        | Create a new banner |
@@ -63,10 +63,25 @@ composer require admin/banners
 2. Access the Banner manager from your admin dashboard.
 
 
+## Example
+
+```php
+// Creating a new banner
+$banner = new Banner();
+$banner->title = 'Welcome Banner';
+$banner->sub_title = 'We are glad you are here';
+$banner->description = 'This is the description of the welcome banner shown on the homepage.';
+$banner->button_title = 'Learn More';
+$banner->button_url = '/about-us';
+$banner->sort_order = 1;
+$banner->image = 'banners/welcome.jpg'; // store the path to your uploaded image
+$banner->save();
+```
+
 ## Customization
 
 You can customize views, routes, and permissions by editing the configuration file.
 
 ## License
 
-This package is open-sourced software licensed under the [MIT license](LICENSE).
+This package is open-sourced software licensed under the Dotsquares.write code in the readme.md file regarding to the admin/banner manager
