@@ -50,14 +50,23 @@ Add the following to your `composer.json` to use the package from a local path:
 composer require admin/banners
 ```
 
-## Publish Files
+## Usage
 
-After installing, publish the module's migrations, config, views, or other assets:
+1. Publish the configuration and migration files:
+    ```bash
+    php artisan banner:publish --force
 
-```bash
-php artisan vendor:publish --tag=banner
+    composer dump-autoload
+    
+    php artisan migrate
+    ```
+2. Access the Banner manager from your admin dashboard.
 
+
+## Customization
+
+You can customize views, routes, and permissions by editing the configuration file.
 
 ## License
 
-MIT
+This package is open-sourced software licensed under the [MIT license](LICENSE).
