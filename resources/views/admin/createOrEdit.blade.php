@@ -2,11 +2,11 @@
 
 @section('title', 'Banners Management')
 
-@section('page-title', 'Create Banner')
+@section('page-title', isset($banner) ? 'Edit Banner' : 'Create Banner')
 
 @section('breadcrumb')
     <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.banners.index') }}">Manage Banners</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Create Banner</li>
+    <li class="breadcrumb-item active" aria-current="page">{{isset($banner) ? 'Edit Banner' : 'Create Banner'}}</li>
 @endsection
 
 @section('content')
