@@ -25,7 +25,7 @@
                             <div class="col-md-6">                                
                                 <div class="form-group">
                                     <label>Title<span class="text-danger">*</span></label>
-                                    <input type="text" name="title" class="form-control alphabets-only"
+                                    <input type="text" name="title" class="form-control"
                                         value="{{ $banner?->title ?? old('title') }}" required>
                                     @error('title')
                                         <div class="text-danger validation-error">{{ $message }}</div>
@@ -35,7 +35,7 @@
                             <div class="col-md-6">                                
                                 <div class="form-group">
                                     <label>Sub Title<span class="text-danger">*</span></label>
-                                    <input type="text" name="sub_title" class="form-control alphabets-only"
+                                    <input type="text" name="sub_title" class="form-control"
                                         value="{{ $banner?->sub_title ?? old('sub_title') }}" required>
                                     @error('sub_title')
                                         <div class="text-danger validation-error">{{ $message }}</div>
@@ -76,7 +76,22 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-6">                                
+                            <div class="col-md-6">                
+                                <div class="form-group">
+                                    <label>Status<span class="text-danger">*</span></label>
+                                    <select name="status" class="form-control select2" required>
+                                        <option value="1" {{ (($banner?->status ?? old('status')) == '1') ? 'selected' : '' }}>Active</option>
+                                        <option value="0" {{ (($banner?->status ?? old('status')) == '0') ? 'selected' : '' }}>InActive</option>
+                                    </select>
+                                    @error('status')
+                                        <div class="text-danger validation-error">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">            
                                 <div class="form-group">
                                     <label>Image<span class="text-danger">*</span></label>
                                     <input type="file" name="image" class="form-control" id="imageInput" {{ isset($banner) ? '' : 'required' }}>
@@ -92,7 +107,6 @@
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="form-group">
                             <label>Description<span class="text-danger">*</span></label>
@@ -176,17 +190,14 @@
                     title: {
                         required: true,
                         minlength: 3,
-                        alphabetsOnly: true
                     },
                     sub_title: {
                         required: true,
                         minlength: 3,
-                        alphabetsOnly: true
                     },
                     button_title: {
                         required: true,
                         minlength: 3,
-                        alphabetsOnly: true
                     },
                     button_url: {
                         required: true,

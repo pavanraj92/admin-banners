@@ -53,6 +53,7 @@
                                     <th scope="col">Title</th>
                                     <th scope="col">Sub Title</th>
                                     <th scope="col">Button Title</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Created At</th>
                                     <th scope="col">Action</th>
                                 </tr>
@@ -68,6 +69,23 @@
                                     <td>{{ $banner->title }}</td>
                                     <td>{{ $banner->sub_title }}</td>
                                     <td>{{ $banner->button_title }}</td>
+                                    <td>
+                                        <!-- create update status functionality-->
+                                        @if ($banner->status == '1')
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+                                                title="Click to change status to inactive"
+                                                data-url="{{ route('admin.banners.updateStatus') }}"
+                                                data-method="POST" data-status="0" data-id="{{ $banner->id }}"
+                                                class="btn btn-success btn-sm update-status">Active</a>
+                                        @else
+                                            <a href="javascript:void(0)" data-toggle="tooltip" data-placement="top"
+                                                title="Click to change status to active"
+                                                data-url="{{ route('admin.banners.updateStatus') }}"
+                                                data-method="POST" data-status="1"
+                                                data-id="{{ $banner->id }}"
+                                                class="btn btn-warning btn-sm update-status">InActive</a>
+                                        @endif
+                                    </td>
                                     <td>
                                         {{ $banner->created_at
                                                         ? $banner->created_at->format(config('GET.admin_date_time_format') ?? 'Y-m-d H:i:s')

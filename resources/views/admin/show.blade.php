@@ -37,6 +37,10 @@
                                         <td scope="col">{{ $banner->button_url ?? 'N/A' }}</td>                                   
                                     </tr>
                                     <tr>
+                                        <th scope="row">Status</th>
+                                        <td scope="col"> {!! config('banner.constants.aryStatusLabel.' . $banner->status, 'N/A') !!}</td>
+                                    </tr>    
+                                    <tr>
                                         <th scope="row">Image</th>
                                         <td scope="col">
                                             @if ($banner->image)

@@ -6,5 +6,6 @@ use admin\banners\Controllers\BannerManagerController;
 Route::name('admin.')->middleware(['web','auth:admin'])->group(function () {  
     Route::middleware('auth:admin')->group(function () {
         Route::resource('banners', BannerManagerController::class);
+        Route::post('banners/updateStatus', [BannerManagerController::class, 'updateStatus'])->name('banners.updateStatus');
     });
 });
