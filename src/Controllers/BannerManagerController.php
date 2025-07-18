@@ -113,4 +113,33 @@ class BannerManagerController extends Controller
             return response()->json(['success' => false, 'message' => 'Failed to delete record.', 'error' => $e->getMessage()], 500);
         }
     }
+
+    public function updateStatus(Request $request)
+    {
+        try {
+            $banner = Banner::findOrFail($request->id);
+            $banner->status = $request->status;
+            $banner->save();
+
+            // create status html dynamically        
+            $dataStatus = $banner->status == '1' ? '0' : '1';
+            $label = $banner->status == '1' ? 'Active' : 'InActive';
+            $btnClass = $banner->status == '1' ? 'btn-success' : 'btn-warning';
+            $tooltip = $banner->status == '1' ? 'Click to change status to inactive' : 'Click to change status to active';
+
+            $strHtml = '<a href="javascript:void(0)"'
+                . ' data-toggle="tooltip"'
+                . ' data-placement="top"'
+                . ' title="' . $tooltip . '"'
+                . ' data-url="' . route('admin.banners.updateStatus') . '"'
+                . ' data-method="POST"'
+                . ' data-status="' . $dataStatus . '"'
+                . ' data-id="' . $banner->id . '"'
+                . ' class="btn ' . $btnClass . ' btn-sm update-status">' . $label . '</a>';
+
+            return response()->json(['success' => true, 'message' => 'Status updated to ' . $label, 'strHtml' => $strHtml]);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'message' => 'Failed to delete record.', 'error' => $e->getMessage()], 500);
+        }
+    }
 }

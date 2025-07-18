@@ -13,12 +13,13 @@ class BannerCreateRequest extends FormRequest
     {
         return [                   
             'title' => 'required|string|min:3|max:255|unique:banners,title',
-            'sub_title' => 'nullable|string|max:255',
-            'button_title' => 'nullable|string|max:255',
-            'button_url' => 'nullable|string|max:255',
-            'sort_order' => 'nullable|numeric|max:255',
+            'sub_title' => 'required|string|max:255',
+            'button_title' => 'required|string|max:255',
+            'button_url' => 'required|string|max:255',
+            'sort_order' => 'required|numeric|min:0|max:2147483647',
             'description' => 'required|string|min:3|max:65535',
             'image' => 'required|image',
+            'status' => 'required|in:0,1',
         ];
     }
 
