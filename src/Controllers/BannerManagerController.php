@@ -27,6 +27,7 @@ class BannerManagerController extends Controller
     {
         try {
             $banners = Banner::filter($request->query('keyword'))
+                ->filterByStatus($request->query('status'))
                 ->latest()
                 ->paginate(Banner::getPerPageLimit())
                 ->withQueryString();
