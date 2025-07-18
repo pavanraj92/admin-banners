@@ -21,6 +21,7 @@ class Banner extends Model
         'button_url',
         'sort_order',
         'image',
+        'status'
     ];
 
     public function scopeFilter($query, $keyword)
@@ -31,6 +32,17 @@ class Banner extends Model
                   ->orWhere('sub_title', 'like', '%' . $keyword . '%');
             });
         }
+        return $query;
+    }
+        /**
+     * filter by status
+     */
+    public function scopeFilterByStatus($query, $status)
+    {
+        if (!is_null($status)) {
+            return $query->where('status', $status);
+        }
+
         return $query;
     }
 

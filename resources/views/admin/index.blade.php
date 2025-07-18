@@ -25,6 +25,16 @@
                                     value="{{ app('request')->query('keyword') }}" placeholder="Enter title or sub title">
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="status">Status</label>
+                                <select name="status" id="status" class="form-control select2">
+                                    <option value="">All</option>
+                                    <option value="0" {{ app('request')->query('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                                    <option value="1" {{ app('request')->query('status') == '1' ? 'selected' : '' }}>Active</option>
+                                </select>                                   
+                            </div>
+                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" form="filterForm" class="btn btn-primary mb-3">Filter</button>
