@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('button_title')->nullable();
             $table->string('button_url')->nullable();
-            $table->integer('sort_order')->nullable()->default(0);
+            $table->integer('sort_order')->unique()->nullable();
             $table->boolean('status')->nullable()->default(true);
             $table->string('image')->nullable();
             $table->timestamps();
