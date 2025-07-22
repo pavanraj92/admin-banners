@@ -117,7 +117,7 @@
                         </div>
                        
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
+                            <button type="submit" class="btn btn-primary" id="saveBtn">{{ isset($banner) ? 'Update' : 'Save'}}</button>
                             <a href="{{ route('admin.banners.index') }}" class="btn btn-secondary">Back</a>
                         </div>
                     </form>
@@ -250,8 +250,11 @@
                     }
 
                     const $btn = $('#saveBtn');
-                    $btn.prop('disabled', true).text('Saving...');
-
+                    if ($btn.text().trim().toLowerCase() === 'update') {
+                        $btn.prop('disabled', true).text('Updating...');
+                    } else {
+                        $btn.prop('disabled', true).text('Saving...');
+                    }
                     // Now submit
                     form.submit();
                 },

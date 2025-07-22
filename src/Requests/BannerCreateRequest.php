@@ -16,7 +16,7 @@ class BannerCreateRequest extends FormRequest
             'sub_title' => 'required|string|max:255',
             'button_title' => 'required|string|max:255',
             'button_url' => 'required|string|max:255',
-            'sort_order' => 'required|numeric|min:0|max:2147483647',
+            'sort_order' => 'required|numeric|min:0|max:2147483647|unique:banners,sort_order',
             'description' => 'required|string|min:3|max:65535',
             'image' => 'required|image',
             'status' => 'required|in:0,1',
