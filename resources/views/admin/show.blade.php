@@ -5,7 +5,7 @@
 @section('page-title', 'Banner Details')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.banners.index') }}">Manage Banners</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.banners.index') }}">Banner Manager</a></li>
     <li class="breadcrumb-item active" aria-current="page">Banner Details</li>
 @endsection
 
@@ -18,7 +18,7 @@
                 <div class="card">                    
                     <div class="table-responsive">
                          <div class="card-body">      
-                            <table class="table table-responsive-lg table-no-border">
+                            <table class="table table-striped">
                                 <tbody>
                                     <tr>
                                         <th scope="row">Title</th>

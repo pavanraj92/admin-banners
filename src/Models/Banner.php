@@ -5,10 +5,11 @@ namespace admin\banners\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Config;
+use Kyslik\ColumnSortable\Sortable;
 
 class Banner extends Model
 {
-    use HasFactory;
+    use HasFactory, Sortable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +23,17 @@ class Banner extends Model
         'sort_order',
         'image',
         'status'
+    ];
+
+     /**
+     * The attributes that should be sortable.
+     */
+    public $sortable = [
+        'title',
+        'sub_title',
+        'button_title',
+        'status',
+        'created_at',
     ];
 
     public function scopeFilter($query, $keyword)
