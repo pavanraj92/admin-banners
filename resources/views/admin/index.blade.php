@@ -2,10 +2,10 @@
 
 @section('title', 'Banners Management')
 
-@section('page-title', 'Manage Banners')
+@section('page-title', 'Banner Manager')
 
 @section('breadcrumb')
-<li class="breadcrumb-item active" aria-current="page">Manage Banners</li>
+<li class="breadcrumb-item active" aria-current="page">Banner Manager</li>
 @endsection
 
 @section('content')
@@ -22,7 +22,7 @@
                             <div class="form-group">
                                 <label for="title">Keyword</label>
                                 <input type="text" name="keyword" id="keyword" class="form-control"
-                                    value="{{ app('request')->query('keyword') }}" placeholder="Enter title or sub title">
+                                    value="{{ app('request')->query('keyword') }}" placeholder="Enter title, sub title">                                   
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -35,11 +35,14 @@
                                 </select>                                   
                             </div>
                         </div>
-                    </div>
-                    <div class="text-right">
-                        <button type="submit" form="filterForm" class="btn btn-primary mb-3">Filter</button>
-                        <a href="{{ route('admin.banners.index') }}" class="btn btn-secondary mb-3">Reset</a>
-                    </div>
+                        <div class="col-auto mt-1 text-right">
+                            <div class="form-group">
+                                <label for="created_at">&nbsp;</label>
+                                <button type="submit" form="filterForm" class="btn btn-primary mt-4">Filter</button>
+                                <a href="{{ route('admin.banners.index') }}" class="btn btn-secondary mt-4">Reset</a>
+                            </div>
+                        </div>
+                    </div>                        
                 </form>
             </div>
         </div>
@@ -59,12 +62,12 @@
                         <table class="table">
                             <thead class="thead-light">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Title</th>
-                                    <th scope="col">Sub Title</th>
-                                    <th scope="col">Button Title</th>
-                                    <th scope="col">Status</th>
-                                    <th scope="col">Created At</th>
+                                    <th scope="col">S. No.</th>
+                                    <th scope="col">@sortablelink('title', 'Title', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('sub_title', 'Sub Title', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('button_title', 'Button Title', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('status', 'Status', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
+                                    <th scope="col">@sortablelink('created_at', 'Created At', [], ['style' => 'color: #4F5467; text-decoration: none;'])</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -101,31 +104,32 @@
                                                         ? $banner->created_at->format(config('GET.admin_date_time_format') ?? 'Y-m-d H:i:s')
                                                         : '—' }}
                                     </td>
-                                    <td>
+                                    <td style="width: 10%;">
+                                        @admincan('banners_manager_view')
+                                        <a href="{{ route('admin.banners.show', $banner) }}" 
+                                            data-toggle="tooltip"
+                                            data-placement="top"
+                                            title="View this record"
+                                            class="btn btn-warning btn-sm"><i class="mdi mdi-eye"></i></a>
+                                        @endadmincan
                                         @admincan('banners_manager_edit')
                                         <a href="{{ route('admin.banners.edit', $banner) }}"
                                             data-toggle="tooltip"
                                             data-placement="top"
                                             title="Edit this record"
                                             class="btn btn-success btn-sm"><i class="mdi mdi-pencil"></i></a>
-                                        @endadmincan
-                                        @admincan('banners_manager_view')
-                                        <a href="{{ route('admin.banners.show', $banner) }}"
-                                            data-toggle="tooltip"
-                                            data-placement="top"
-                                            title="View this record"
-                                            class="btn btn-warning btn-sm"><i class="mdi mdi-eye"></i></a>
-                                        @endadmincan
+                                        @endadmincan                                                   
                                         @admincan('banners_manager_delete')
-                                        <a href="javascript:void(0)"
-                                            data-toggle="tooltip"
+                                        <a href="javascript:void(0)" 
+                                            data-toggle="tooltip" 
                                             data-placement="top"
-                                            title="Delete this record"
+                                            title="Delete this record" 
                                             data-url="{{ route('admin.banners.destroy', $banner) }}"
-                                            data-text="Are you sure you want to delete this record?"
+                                            data-text="Are you sure you want to delete this record?"                                                    
                                             data-method="DELETE"
-                                            class="btn btn-danger btn-sm delete-record"><i class="mdi mdi-delete"></i></a>
+                                            class="btn btn-danger btn-sm delete-record" ><i class="mdi mdi-delete"></i></a>
                                         @endadmincan
+                                        
                                     </td>
                                 </tr>
                                 @php
@@ -134,7 +138,7 @@
                                 @endforeach
                                 @else
                                 <tr>
-                                    <td colspan="6" class="text-center">No banners found.</td>
+                                    <td colspan="7" class="text-center">No records found.</td>
                                 </tr>
                                 @endif
                             </tbody>

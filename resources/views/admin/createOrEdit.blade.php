@@ -5,7 +5,7 @@
 @section('page-title', isset($banner) ? 'Edit Banner' : 'Create Banner')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.banners.index') }}">Manage Banners</a></li>
+    <li class="breadcrumb-item active" aria-current="page"><a href="{{ route('admin.banners.index') }}">Banner Manager</a></li>
     <li class="breadcrumb-item active" aria-current="page">{{isset($banner) ? 'Edit Banner' : 'Create Banner'}}</li>
 @endsection
 
@@ -91,21 +91,24 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-6">            
+                            <div class="col-md-4">                                
                                 <div class="form-group">
                                     <label>Image<span class="text-danger">*</span></label>
                                     <input type="file" name="image" class="form-control" id="imageInput" {{ isset($banner) ? '' : 'required' }}>
                                     @error('image')
                                         <div class="text-danger validation-error">{{ $message }}</div>
-                                    @enderror
-
-                                    <div id="imagePreview" style="margin-top:10px;">
+                                    @enderror                                  
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">                                    
+                                    <div id="imagePreview">
                                         @if(isset($banner) && $banner->image)
-                                            <img src="{{ asset('storage/'.$banner->image) }}" alt="Banner Image" style="max-width: 200px; max-height: 120px;">
+                                            <img src="{{ asset('storage/'.$banner->image) }}" alt="Banner Image" class="img-thumbnail" style="max-width: 200px; max-height: 120px;">
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
 
                         <div class="form-group">
@@ -279,7 +282,7 @@
                 if (input.files && input.files[0]) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
-                        preview.html('<img src="' + e.target.result + '" style="max-width:200px; max-height:120px;" />');
+                        preview.html('<img src="' + e.target.result + '" class="img-thumbnail style="max-width:200px; max-height:120px;" />');
                     }
                     reader.readAsDataURL(input.files[0]);
                 }
