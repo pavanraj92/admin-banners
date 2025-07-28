@@ -1,4 +1,4 @@
-# admin-banners
+# Admin Banner Manager
 
 This module provides CRUD operations for managing banners in the admin panel.
 
@@ -8,6 +8,38 @@ This module provides CRUD operations for managing banners in the admin panel.
 - View a list of existing banners
 - Update banner details
 - Delete banners
+
+---
+## Requirements
+
+- PHP >=8.2
+- Laravel Framework >= 12.x
+
+---
+
+## Installation
+
+### 1. Add Git Repository to `composer.json`
+
+```json
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/pavanraj92/admin-banners.git"
+    }
+]
+```
+
+### 2. Require the package via Composer
+    ```bash
+    composer require admin/banners:@dev
+    ```
+
+### 3. Publish assets
+    ```bash
+    php artisan banner:publish --force
+    ```
+---
 
 ## Usage
 
@@ -26,62 +58,25 @@ This module provides CRUD operations for managing banners in the admin panel.
 | PUT    | `/banners/{id}`   | Update a banner     |
 | DELETE | `/banners/{id}`   | Delete a banner     |
 
-## Requirements
+---
 
-- PHP 8.2+
-- Laravel Framework
+## Protecting Admin Routes
 
-## Need to update `composer.json` file
-
-Add the following to your `composer.json` to use the package from a local path:
-
-```json
-"repositories": [
-    {
-        "type": "vcs",
-        "url": "https://github.com/pavanraj92/admin-banners.git"
-    }
-]
-```
-
-## Installation
-
-```bash
-composer require admin/banners
-```
-
-## Usage
-
-1. Publish the configuration and migration files:
-    ```bash
-    php artisan banner:publish --force
-
-    composer dump-autoload
-    
-    php artisan migrate
-    ```
-2. Access the Banner manager from your admin dashboard.
-
-
-## Example
+Protect your routes using the provided middleware:
 
 ```php
-// Creating a new banner
-$banner = new Banner();
-$banner->title = 'Welcome Banner';
-$banner->sub_title = 'We are glad you are here';
-$banner->description = 'This is the description of the welcome banner shown on the homepage.';
-$banner->button_title = 'Learn More';
-$banner->button_url = '/about-us';
-$banner->sort_order = 1;
-$banner->image = 'banners/welcome.jpg'; // store the path to your uploaded image
-$banner->save();
+Route::middleware(['web','admin.auth'])->group(function () {
+    // Admin banner routes here
+});
 ```
+---
 
-## Customization
+## Database Tables
 
-You can customize views, routes, and permissions by editing the configuration file.
+- `banners` - Stores banners information
+
+---
 
 ## License
 
-This package is open-sourced software licensed under the Dotsquares.write code in the readme.md file regarding to the admin/banner manager
+This package is open-sourced software licensed under the MIT license.
