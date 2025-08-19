@@ -41,7 +41,8 @@ class Banner extends Model
         if ($keyword) {
             $query->where(function ($q) use ($keyword) {
                 $q->where('title', 'like', '%' . $keyword . '%')
-                  ->orWhere('sub_title', 'like', '%' . $keyword . '%');
+                  ->orWhere('sub_title', 'like', '%' . $keyword . '%')
+                  ->orWhere('button_title', 'like', '%' . $keyword . '%');
             });
         }
         return $query;

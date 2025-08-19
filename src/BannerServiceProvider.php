@@ -31,6 +31,11 @@ class BannerServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(base_path('Modules/Banners/database/migrations'));
         }
 
+        // Also merge config from published module if it exists
+        if (file_exists(base_path('Modules/Banners/config/banners.php'))) {
+            $this->mergeConfigFrom(base_path('Modules/Banners/config/banners.php'), 'banner.constants');
+        }
+
         // Only publish automatically during package installation, not on every request
         // Use 'php artisan banners:publish' command for manual publishing
         // $this->publishWithNamespaceTransformation();
