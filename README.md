@@ -37,7 +37,7 @@ This module provides CRUD operations for managing banners in the admin panel.
 
 ### 3. Publish assets
     ```bash
-    php artisan banner:publish --force
+    php artisan banners:publish --force
     ```
 ---
 
