@@ -19,7 +19,13 @@ class BannerServiceProvider extends ServiceProvider
             __DIR__ . '/../resources/views'      // Package views as fallback
         ], 'banner');
 
-        $this->mergeConfigFrom(__DIR__.'/../config/banner.php', 'banner.constants');
+        // Load published module config first (if it exists), then fallback to package config
+        if (file_exists(base_path('Modules/Banners/config/banner.php'))) {
+            $this->mergeConfigFrom(base_path('Modules/Banners/config/banner.php'), 'banner.constants');
+        } else {
+            // Fallback to package config if published config doesn't exist
+            $this->mergeConfigFrom(__DIR__.'/../config/banner.php', 'banner.constants');
+        }
         
         // Also register module views with a specific namespace for explicit usage
         if (is_dir(base_path('Modules/Banners/resources/views'))) {
@@ -31,17 +37,13 @@ class BannerServiceProvider extends ServiceProvider
             $this->loadMigrationsFrom(base_path('Modules/Banners/database/migrations'));
         }
 
-        // Also merge config from published module if it exists
-        if (file_exists(base_path('Modules/Banners/config/banners.php'))) {
-            $this->mergeConfigFrom(base_path('Modules/Banners/config/banners.php'), 'banner.constants');
-        }
-
         // Only publish automatically during package installation, not on every request
         // Use 'php artisan banners:publish' command for manual publishing
         // $this->publishWithNamespaceTransformation();
         
         // Standard publishing for non-PHP files
         $this->publishes([
+            __DIR__ . '/../config/' => base_path('Modules/Banners/config/'),
             __DIR__ . '/../database/migrations' => base_path('Modules/Banners/database/migrations'),
             __DIR__ . '/../resources/views' => base_path('Modules/Banners/resources/views/'),
         ], 'banner');
