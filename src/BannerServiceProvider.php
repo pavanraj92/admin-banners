@@ -189,6 +189,12 @@ class BannerServiceProvider extends ServiceProvider
             $content
         );
 
+        $content = str_replace(
+            'use admin\\admin_auth\\Services\\ImageService;',
+            'use Modules\\AdminAuth\\app\\Services\\ImageService;',
+            $content
+        );
+
         return $content;
     }
 

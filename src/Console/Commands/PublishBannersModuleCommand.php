@@ -98,6 +98,11 @@ class PublishBannersModuleCommand extends Command
             $content = str_replace('use admin\\banners\\Models\\Banner;', 'use Modules\\Banners\\app\\Models\\Banner;', $content);
             $content = str_replace('use admin\\banners\\Requests\\BannerCreateRequest;', 'use Modules\\Banners\\app\\Http\\Requests\\BannerCreateRequest;', $content);
             $content = str_replace('use admin\\banners\\Requests\\BannerUpdateRequest;', 'use Modules\\Banners\\app\\Http\\Requests\\BannerUpdateRequest;', $content);
+            $content = str_replace(
+                'use admin\\admin_auth\\Services\\ImageService;',
+                'use Modules\\AdminAuth\\app\\Services\\ImageService;',
+                $content
+            );
         }
 
         return $content;
