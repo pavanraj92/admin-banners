@@ -3,6 +3,7 @@
 namespace admin\banners\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BannerUpdateRequest extends FormRequest
 {
@@ -11,8 +12,14 @@ class BannerUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $rules = [          
-            'title' => 'required|string|min:3|max:255|unique:banners,title,' . $this->route('banner')->id,            
+        $rules = [
+            'title' => [
+                'required',
+                'string',
+                'min:3',
+                'max:255',
+                Rule::unique('banners', 'title')->ignore($this->route('banner')->id)->whereNull('deleted_at'),
+            ],       
             'sub_title' => 'required|string|max:255',
             'button_title' => 'required|string|max:255',
             'button_url' => 'required|string|max:255',
